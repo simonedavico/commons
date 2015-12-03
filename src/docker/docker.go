@@ -18,7 +18,7 @@ func createDockerClient() docker.Client {
 
 func createDockerTLSClient() docker.Client {
 	path := os.Getenv("DOCKER_CERT_PATH")
-	endpoint := "tcp://"+os.Getenv("DOCKER_HOST")+":2376"
+	endpoint := "tcp://"+os.Getenv("DOCKER_HOST")+":"+os.Getenv("DOCKER_PORT")
     ca := fmt.Sprintf("%s/ca.pem", path)
     cert := fmt.Sprintf("%s/cert.pem", path)
     key := fmt.Sprintf("%s/key.pem", path)
