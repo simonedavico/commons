@@ -7,7 +7,7 @@ import (
 	"log"
 )
 
-func storeOnMinio(fileName string, bucket string, key string) {
+func StoreOnMinio(fileName string, bucket string, key string) {
 	config := minio.Config{
 		AccessKeyID:     os.Getenv("MINIO_ACCESS_KEY_ID"),
 		SecretAccessKey: os.Getenv("MINIO_SECRET_ACCESS_KEY"),
@@ -33,12 +33,12 @@ func storeOnMinio(fileName string, bucket string, key string) {
 		}
 	}
 
-func generateKey(fileName string) string{
+func GenerateKey(fileName string) string{
 	// TODO: Use the hash library to generate a hash
 	return ("hash/BID/1/"+os.Getenv("CONTAINER_NAME")+"/"+os.Getenv("COLLECTOR_NAME")+"/"+os.Getenv("DATA_NAME")+"/"+fileName)
 }
 
-func gzipFile(fileName string) {
+func GzipFile(fileName string) {
 	cmd := exec.Command("gzip", fileName)
 	err := cmd.Start()
 	cmd.Wait()
