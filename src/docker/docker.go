@@ -7,7 +7,7 @@ import (
 	"fmt"
 )
 
-func createDockerClient() docker.Client {
+func CreateDockerClient() docker.Client {
 	endpoint := "unix:///var/run/docker.sock"
     client, err := docker.NewClient(endpoint)
 	if err != nil {
@@ -16,7 +16,7 @@ func createDockerClient() docker.Client {
 	return *client
 	}
 
-func createDockerTLSClient() docker.Client {
+func CreateDockerTLSClient() docker.Client {
 	path := os.Getenv("DOCKER_CERT_PATH")
 	endpoint := "tcp://"+os.Getenv("DOCKER_HOST")+":"+os.Getenv("DOCKER_PORT")
     ca := fmt.Sprintf("%s/ca.pem", path)
