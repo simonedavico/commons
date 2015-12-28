@@ -1,4 +1,4 @@
-package minio
+package commons
 
 import (
 	"github.com/minio/minio-go"
