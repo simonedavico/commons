@@ -34,6 +34,23 @@ func StoreOnMinio(fileName string, bucket string, key string) {
 		}
 	}
 
+func callMinioClient(fileName string, minioHost string, minioKey string) {
+		//TODO: change, we are using sudo to elevate the priviledge in the container, but it is not nice
+		//NOTE: it seems that the commands that are not in PATH, should be launched using sh -c
+		log.Printf("sh -c sudo /app/mc --quiet cp " + fileName + " " + minioHost + "/runs/" + minioKey)
+		cmd := exec.Command("sh", "-c", "sudo /app/mc --quiet cp " + fileName + " " + minioHost + "/runs/" + minioKey)
+    	var out bytes.Buffer
+		var stderr bytes.Buffer
+		cmd.Stdout = &out
+		cmd.Stderr = &stderr
+		err := cmd.Run()
+		if err != nil {
+		    fmt.Println(fmt.Sprint(err) + ": " + stderr.String())
+		    return
+		}
+		fmt.Println("Result: " + out.String())
+}
+
 func GenerateKey(fileName string) string {
 	// TODO: Use the hash library to generate a hash
 	trialId := os.Getenv("TRIAL_ID")
