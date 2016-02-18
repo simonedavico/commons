@@ -18,9 +18,8 @@ type KafkaMessage struct {
 	Total_trials_num int `json:"total_trials_num"`
 	}
 
-func signalOnKafka(minioKey string, SUTName string, SUTVersion string) {
-	totalTrials := strconv.Atoi(os.Getenv("TOTAL_TRIALS_NUM"))
-	kafkaMsg := KafkaMessage{SUT_name: SUTName, SUT_version: SUTVersion, Minio_key: minioKey, Trial_id: os.Getenv("TRIAL_ID"), Experiment_id: os.Getenv("EXPERIMENT_ID"), Total_trials_num: totalTrials}
+func signalOnKafka(minioKey string, SUTName string, SUTVersion string, totalTrials int, trialId string, experimentId string, collectorName string) {
+	kafkaMsg := KafkaMessage{SUT_name: SUTName, SUT_version: SUTVersion, Minio_key: minioKey, Trial_id: trialId, Experiment_id: experimentId, Total_trials_num: totalTrials}
 	jsMessage, err := json.Marshal(kafkaMsg)
 	if err != nil {
 		log.Printf("Failed to marshall json message")
@@ -35,7 +34,7 @@ func signalOnKafka(minioKey string, SUTName string, SUTVersion string) {
 	        log.Fatalln(err)
 	    }
 	}()
-	msg := &sarama.ProducerMessage{Topic: os.Getenv("COLLECTOR_NAME"), Value: sarama.StringEncoder(jsMessage)}
+	msg := &sarama.ProducerMessage{Topic: collectorName, Value: sarama.StringEncoder(jsMessage)}
 	partition, offset, err := producer.SendMessage(msg)
 	if err != nil {
 	    log.Printf("FAILED to send message: %s\n", err)
