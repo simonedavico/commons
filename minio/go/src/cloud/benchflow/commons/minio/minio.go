@@ -6,6 +6,8 @@ import (
 	"os/exec"
 	"log"
 	"strings"
+	"bytes"
+	"fmt"
 )
 
 func StoreOnMinio(fileName string, bucket string, key string) {
