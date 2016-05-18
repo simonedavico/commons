@@ -1,0 +1,41 @@
+engines:
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - python
+  pep8:
+    enabled: true
+  radon: 
+    enabled: true
+  gofmt:
+    enabled: true
+  golint:
+    enabled: true
+    checks:
+      GoLint/Naming/MixedCaps:
+        enabled: false
+  govet:
+    enabled: true
+  checkstyle:
+    enabled: true
+  scalastyle:
+    enabled: true
+  markdownlint:
+    enabled: true
+  shellcheck:
+    enabled: true
+
+ratings:
+  paths:
+    - "**.go"
+    - "**.py"
+    - "**.java"
+    - "**.scala"
+    - "**.sh"
+    - "Dockerfile"
+    - "Dockerfile.test"
+    - "Dockerfile.ci"
+
+exclude_paths:
+- "**/Godeps/**"
