@@ -2,11 +2,7 @@ package minio
 
 import (
 	"github.com/minio/minio-go"
-	"os"
 	"os/exec"
-	"log"
-	"strings"
-	"bytes"
 	"fmt"
 	"crypto/md5"
 	"encoding/hex"
@@ -34,12 +30,12 @@ func callMinioClient(fileName string, minioHost string, minioKey string) {
 }
 */
 
-func sendGzipToMinio(fileName string, minioHost string, minioKey string, accessKey string, secretAccessKey string) {
-	sendToMinio(fileName, minioHost, minioKey, accessKey, secretAccessKey, "application/gzip")
+func SendGzipToMinio(fileName string, minioHost string, minioPort string, minioKey string, accessKey string, secretAccessKey string) {
+	sendToMinio(fileName, minioHost, minioPort, minioKey, accessKey, secretAccessKey, "application/gzip")
 	}
 
-func sendToMinio(fileName string, minioHost string, minioKey string, accessKey string, secretAccessKey string, fileType string) error {
-	minioClient, err := minio.New(minioHost, accessKey, secretAccessKey, true)
+func sendToMinio(fileName string, minioHost string, minioPort string, minioKey string, accessKey string, secretAccessKey string, fileType string) error {
+	minioClient, err := minio.New(minioHost+":"+minioPort, accessKey, secretAccessKey, false)
 	if err != nil {
 		fmt.Println(err)
 	    return err
@@ -60,7 +56,7 @@ func hashKey(key string) string {
 	}
 
 func GenerateKey(fileName string, trialID string, experimentID string, containerName string, collectorName string, dataName string) string {
-	key := experimentId+"/"+trialId+"/"+containerName+"/"+collectorName+"/"+dataName+"/"+fileName)
+	key := experimentID+"/"+trialID+"/"+containerName+"/"+collectorName+"/"+dataName+"/"+fileName
 	return hashKey(key)
 }
 
@@ -72,4 +68,3 @@ func GzipFile(fileName string) {
 		panic(err)
 		}
 }
-

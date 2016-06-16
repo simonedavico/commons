@@ -1,12 +1,9 @@
 package kafka
 
 import (
-    "os"
-    "bytes"
     "github.com/Shopify/sarama"
     "log"
     "encoding/json"
-    "strings"
 )
 
 type KafkaMessage struct {
@@ -18,8 +15,8 @@ type KafkaMessage struct {
 	Collector_name string `json:"collector_name"`
 	}
 
-func signalOnKafka(minioKey string, trialID string, experimentID string, containerID string, hostID string, collectorName string, kafkaHost string, kafkaPort string, kafkaTopic) {
-	kafkaMsg := KafkaMessage{Minio_key: minioKey, Trial_id: trialID, Experiment_id: experimentID, Container_id: containerID, Collector_name: collectorName}
+func SignalOnKafka(minioKey string, trialID string, experimentID string, containerID string, hostID string, collectorName string, kafkaHost string, kafkaPort string, kafkaTopic string) {
+	kafkaMsg := KafkaMessage{Minio_key: minioKey, Trial_id: trialID, Experiment_id: experimentID, Container_id: containerID, Host_id: hostID, Collector_name: collectorName}
 	jsMessage, err := json.Marshal(kafkaMsg)
 	if err != nil {
 		log.Printf("Failed to marshall json message")
