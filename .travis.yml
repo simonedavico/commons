@@ -2,6 +2,8 @@ sudo: required
 dist: precise
 group: edge
 
+sudo: required
+
 language: java
 jdk:
   - oraclejdk8
@@ -17,13 +19,13 @@ branches:
 before_install:  
  # install go 1.5.2
  - wget https://storage.googleapis.com/golang/go1.5.2.linux-amd64.tar.gz
- - tar -C /usr/local -xzf go1.5.2.linux-amd64.tar.gz
+ - sudo tar -C /usr/local -xzf go1.5.2.linux-amd64.tar.gz
  - export GOROOT=/usr/local/go
  - export PATH=$GOROOT/bin:$PATH
  # install python 
- - add-apt-repository ppa:fkrull/deadsnakes
- - apt-get update
- - apt-get install python2.7
+ - sudo add-apt-repository ppa:fkrull/deadsnakes
+ - sudo apt-get update
+ - sudo apt-get install python2.7
 
 install:
   - make all
