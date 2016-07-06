@@ -1,0 +1,14 @@
+{
+	"ImportPath": "cloud/benchflow/commons",
+	"GoVersion": "go1.5.2",
+	"Packages": [
+		"./..."
+	],
+	"Deps": [
+		{
+			"ImportPath": "github.com/Shopify/sarama",
+			"Comment": "v1.9.0",
+			"Rev": "38d579a708d2f87dd4e35342241048e361d1e66a"
+		}
+	]
+}

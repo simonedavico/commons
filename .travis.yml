@@ -22,15 +22,17 @@ before_install:
  - sudo tar -C /usr/local -xzf go1.5.2.linux-amd64.tar.gz
  - export GOROOT=/usr/local/go
  - export PATH=$GOROOT/bin:$PATH
+ # TODO: if and when needed, enable python support and add it to CI, testing that the code works
  # install python 
- - sudo add-apt-repository ppa:fkrull/deadsnakes -y
- - sudo apt-get update
- - sudo apt-get -y install python2.7
+ # - sudo add-apt-repository ppa:fkrull/deadsnakes -y
+ # - sudo apt-get update
+ # - sudo apt-get -y install python2.7
 
 install:
   - make all
 
-script: make test_java
+script: 
+  - make test_java
 
 cache:
   directories:
@@ -50,6 +52,10 @@ deploy:
     secure: $GITHUB_ACCESS_TOKEN
   file: 
     - keyname-hash-generator/java/target/benchflow-keyname-hash-generator.jar
+    - docker/go/src/cloud/benchflow/commons/docker/docker.go
+    - kafka/go/src/cloud/benchflow/commons/kafka/kafka.go
+    - keyname-hash-generator/go/src/cloud/benchflow/commons/hashing/hashing.go
+    - minio/go/src/cloud/benchflow/commons/minio/minio.go
   skip_cleanup: true
   on:
     tags: false

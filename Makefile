@@ -6,9 +6,17 @@ VERSION = dev
 JAVA_VERSION_FOR_COMPILATION = java-8-oracle
 JAVA_HOME := `update-java-alternatives -l | cut -d' ' -f3 | grep $(JAVA_VERSION_FOR_COMPILATION)`"/jre"
 
-.PHONY: all build_release_java
+.PHONY: all build_release_java build_release_go
 
-all: build_release_java
+all: build_release_java build_release_go
+
+build_go:
+	$(MAKE) -C ./docker/go
+	$(MAKE) -C ./kafka/go
+	$(MAKE) -C ./keyname-hash-generator/go
+	$(MAKE) -C ./minio/go
+
+build_release_go: build_go
 
 clean_java:
 	cd keyname-hash-generator/java/ && \

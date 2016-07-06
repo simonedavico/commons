@@ -2,9 +2,7 @@ package docker
 
 import (
 	"github.com/fsouza/go-dockerclient"
-	"os"
 	"log"
-	"fmt"
 )
 
 func CreateDockerClient() docker.Client {
@@ -12,6 +10,6 @@ func CreateDockerClient() docker.Client {
     client, err := docker.NewClient(endpoint)
 	if err != nil {
 		log.Fatal(err)
-		}
-	return *client
 	}
+	return *client
+}
