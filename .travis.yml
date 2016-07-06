@@ -21,7 +21,10 @@ before_install:
  - wget https://storage.googleapis.com/golang/go1.5.2.linux-amd64.tar.gz
  - sudo tar -C /usr/local -xzf go1.5.2.linux-amd64.tar.gz
  - export GOROOT=/usr/local/go
+ # Set GOPATH and Add Godeps dependencies to GOPATH and PATH
+ - export GOPATH="${TRAVIS_BUILD_DIR}/Godeps/_workspace"
  - export PATH=$GOROOT/bin:$PATH
+ - export PATH="${TRAVIS_BUILD_DIR}/Godeps/_workspace/bin:$PATH"
  - go get github.com/tools/godep
  # TODO: if and when needed, enable python support and add it to CI, testing that the code works
  # install python 
