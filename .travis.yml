@@ -23,9 +23,9 @@ before_install:
  - export GOROOT=/usr/local/go
  - export PATH=$GOROOT/bin:$PATH
  # install python 
- - sudo add-apt-repository ppa:fkrull/deadsnakes
+ - sudo add-apt-repository ppa:fkrull/deadsnakes -y
  - sudo apt-get update
- - sudo apt-get install python2.7
+ - sudo apt-get -y install python2.7
 
 install:
   - make all
