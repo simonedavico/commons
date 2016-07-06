@@ -13,6 +13,18 @@ branches:
   except:
     - v-dev
 
+# add support for go, and python as well
+before_install:  
+ # install go 1.5.2
+ - wget https://storage.googleapis.com/golang/go1.5.2.linux-amd64.tar.gz
+ - tar -C /usr/local -xzf go1.5.2.linux-amd64.tar.gz
+ - export GOROOT=/usr/local/go
+ - export PATH=$GOROOT/bin:$PATH
+ # install python 
+ - add-apt-repository ppa:fkrull/deadsnakes
+ - apt-get update
+ - apt-get install python2.7
+
 install:
   - make all
 
