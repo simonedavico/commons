@@ -19,6 +19,7 @@ engines:
     enabled: true
   checkstyle:
     enabled: true
+    channel: "beta"
   scalastyle:
     enabled: true
   markdownlint:
