@@ -10,12 +10,13 @@ ifeq ($(UNAME), Darwin)
 else ifeq ($(UNAME),Linux)
 ifndef TRAVIS
 	$(eval JAVA_HOME := $(shell update-java-alternatives -l | cut -d' ' -f3 | egrep '$(JAVA_VERSION_FOR_COMPILATION)'))
-endif 
+endif
 endif
 
 .PHONY: all build_release_java build_release_go
 
-all: build_release_java build_release_go
+# all: build_release_java build_release_go
+all: build_release_java
 
 build_go:
 	$(MAKE) -C ./docker/go
@@ -35,6 +36,7 @@ build_java:
 	cd keyname-hash-generator/java/ && \
 	JAVA_HOME=$(JAVA_HOME) mvn package
 	cd minio/java/ && \
+	JAVA_HOME=$(JAVA_HOME) mvn validate && \
 	JAVA_HOME=$(JAVA_HOME) mvn package
 
 build_release_java: build_java
