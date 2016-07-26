@@ -37,6 +37,7 @@ build_java:
 	JAVA_HOME=$(JAVA_HOME) mvn package
 	cd minio/java/ && \
 	pwd && \
+	cat pom.xml && \
 	JAVA_HOME=$(JAVA_HOME) mvn antrun:run@generateSources && \
 	JAVA_HOME=$(JAVA_HOME) mvn install:install-file@install-hash-generator && \
 	# JAVA_HOME=$(JAVA_HOME) mvn validate && \
