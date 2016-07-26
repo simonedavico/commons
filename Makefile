@@ -36,9 +36,9 @@ build_java:
 	$(MAKE) -C ./minio/java/ build
 
 build_release_java: 
+	# Install keyname-hash-generator so that can be used as dependency for the minio build
 	cd keyname-hash-generator/java/ && \
 	JAVA_HOME=$(JAVA_HOME) mvn package && \
-	# Install keyname-hash-generator so that can be used as dependency for the minio build
 	JAVA_HOME=$(JAVA_HOME) mvn install 
 	$(MAKE) -C ./minio/java/ build_release
 
