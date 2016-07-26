@@ -28,25 +28,26 @@ build_release_go: build_go
 clean_java:
 	cd keyname-hash-generator/java/ && \
 	JAVA_HOME=$(JAVA_HOME) mvn clean
-	cd minio/java/ && \
-	JAVA_HOME=$(JAVA_HOME) mvn clean
+	$(MAKE) -C ./minio/java/ clean
 
 build_java:
 	cd keyname-hash-generator/java/ && \
 	JAVA_HOME=$(JAVA_HOME) mvn package
-	cd minio/java/ && \
-	JAVA_HOME=$(JAVA_HOME) mvn package
+	$(MAKE) -C ./minio/java/ build
 
-build_release_java: build_java
+build_release_java: 
+	# Install keyname-hash-generator so that can be used as dependency for the minio build
+	cd keyname-hash-generator/java/ && \
+	JAVA_HOME=$(JAVA_HOME) mvn package && \
+	JAVA_HOME=$(JAVA_HOME) mvn install 
+	$(MAKE) -C ./minio/java/ build_release
 
 install_java:
 	cd keyname-hash-generator/java/ && \
 	JAVA_HOME=$(JAVA_HOME) mvn install
-	cd minio/java/ && \
-	JAVA_HOME=$(JAVA_HOME) mvn install
+	$(MAKE) -C ./minio/java/ install
 
 test_java:
 	cd keyname-hash-generator/java/ && \
 	JAVA_HOME=$(JAVA_HOME) mvn test
-	cd minio/java/ && \
-	JAVA_HOME=$(JAVA_HOME) mvn test
+	$(MAKE) -C ./minio/java/ test
