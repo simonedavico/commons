@@ -2,7 +2,7 @@
 
 RELEASE_VERSION=v-dev
 
-echo pwd
+pwd
 echo "HELLO, THIS IS WORKING"
 
 mkdir lib

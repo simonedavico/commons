@@ -35,7 +35,7 @@ clean_java:
 build_java:
 	cd keyname-hash-generator/java/ && \
 	JAVA_HOME=$(JAVA_HOME) mvn package
-	cd minio/java/ && \
+	cd ../../minio/java/ && \
 	JAVA_HOME=$(JAVA_HOME) mvn validate && \
 	JAVA_HOME=$(JAVA_HOME) mvn package
 
