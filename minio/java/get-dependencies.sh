@@ -3,6 +3,7 @@
 RELEASE_VERSION=v-dev
 
 echo pwd
+echo "HELLO, THIS IS WORKING"
 
 mkdir lib
 wget -q --no-check-certificate -O ./lib/benchflow-keyname-hash-generator.jar \
