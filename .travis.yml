@@ -16,7 +16,7 @@ branches:
     - v-dev
 
 # add support for go, and python as well
-before_install:  
+before_install:
  # install go 1.5.2 and godep
  - wget https://storage.googleapis.com/golang/go1.5.2.linux-amd64.tar.gz
  - sudo tar -C /usr/local -xzf go1.5.2.linux-amd64.tar.gz
@@ -27,7 +27,7 @@ before_install:
  - export PATH="${TRAVIS_BUILD_DIR}/Godeps/_workspace/bin:$PATH"
  - go get github.com/tools/godep
  # TODO: if and when needed, enable python support and add it to CI, testing that the code works
- # install python 
+ # install python
  # - sudo add-apt-repository ppa:fkrull/deadsnakes -y
  # - sudo apt-get update
  # - sudo apt-get -y install python2.7
@@ -35,7 +35,7 @@ before_install:
 install:
   - make all
 
-script: 
+script:
   - make test_java
 
 cache:
@@ -54,7 +54,7 @@ deploy:
   provider: releases
   api_key:
     secure: $GITHUB_ACCESS_TOKEN
-  file: 
+  file:
     - keyname-hash-generator/java/target/benchflow-keyname-hash-generator.jar
     - minio/java/target/benchflow-minio-client.jar
     - docker/go/src/cloud/benchflow/commons/docker/docker.go

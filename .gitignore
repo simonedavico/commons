@@ -4,3 +4,4 @@ target
 .idea
 .settings
 client.iml
+minio/java/lib
