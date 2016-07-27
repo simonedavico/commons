@@ -62,7 +62,7 @@
                         <configuration>
                             <tasks>
                                 <exec executable="/bin/bash">
-                                    <arg value="get-dependencies.sh" />
+                                    <arg value="./bin/get-dependencies.sh" />
                                 </exec>
                             </tasks>
                         </configuration>

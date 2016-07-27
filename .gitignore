@@ -1,4 +1,5 @@
 bin/
+!minio/java/bin
 Godeps/_workspace/pkg/
 target
 .idea

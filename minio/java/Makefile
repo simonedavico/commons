@@ -24,7 +24,7 @@ clean:
 
 get_external_dependencies:
 	# get keyname-hash-generator as dependency
-	./get-dependencies.sh
+	./bin/get-dependencies.sh
 
 build: find_java get_external_dependencies
 	mvn package
