@@ -10,7 +10,7 @@ ifeq ($(UNAME), Darwin)
 else ifeq ($(UNAME),Linux)
 ifndef TRAVIS
 	$(eval JAVA_HOME := $(shell update-java-alternatives -l | cut -d' ' -f3 | egrep '$(JAVA_VERSION_FOR_COMPILATION)'))
-endif 
+endif
 endif
 
 .PHONY: all build_release_java build_release_go
@@ -35,12 +35,13 @@ build_java:
 	JAVA_HOME=$(JAVA_HOME) mvn package
 	$(MAKE) -C ./minio/java/ build
 
-build_release_java: 
+build_release_java:
 	# Install keyname-hash-generator so that can be used as dependency for the minio build
-	cd keyname-hash-generator/java/ && \
-	JAVA_HOME=$(JAVA_HOME) mvn package && \
-	JAVA_HOME=$(JAVA_HOME) mvn install 
-	$(MAKE) -C ./minio/java/ build_release
+	JAVA_HOME=$(JAVA_HOME) mvn package
+	# cd keyname-hash-generator/java/ && \
+	# JAVA_HOME=$(JAVA_HOME) mvn package && \
+	# JAVA_HOME=$(JAVA_HOME) mvn install
+	# $(MAKE) -C ./minio/java/ build_release
 
 install_java:
 	cd keyname-hash-generator/java/ && \
