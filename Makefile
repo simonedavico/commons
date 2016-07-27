@@ -15,7 +15,8 @@ endif
 
 .PHONY: all build_release_java build_release_go
 
-all: build_release_java build_release_go
+# all: build_release_java build_release_go
+all: build_release_java
 
 build_go:
 	$(MAKE) -C ./docker/go
