@@ -34,7 +34,7 @@
         <dependency>
             <groupId>cloud.benchflow.commons</groupId>
             <artifactId>keyname-hash-generator</artifactId>
-            <version>0.0.1</version>
+            <version>0.1.0</version>
         </dependency>
 
     </dependencies>
@@ -56,20 +56,20 @@
                 <artifactId>maven-antrun-plugin</artifactId>
                 <version>1.8</version>
                 <executions>
-                    <execution>
-                        <id>generateSources</id>
-                        <phase>validate</phase>
-                        <configuration>
-                            <tasks>
-                                <exec executable="/bin/bash">
-                                    <arg value="./bin/get-dependencies.sh" />
-                                </exec>
-                            </tasks>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
+                    <!--<execution>-->
+                        <!--<id>generateSources</id>-->
+                        <!--<phase>validate</phase>-->
+                        <!--<configuration>-->
+                            <!--<tasks>-->
+                                <!--<exec executable="/bin/bash">-->
+                                    <!--<arg value="./bin/get-dependencies.sh" />-->
+                                <!--</exec>-->
+                            <!--</tasks>-->
+                        <!--</configuration>-->
+                        <!--<goals>-->
+                            <!--<goal>run</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
                 </executions>
             </plugin>
 
@@ -91,20 +91,20 @@
                 <artifactId>maven-install-plugin</artifactId>
                 <version>2.5.2</version>
                 <executions>
-                    <execution>
-                        <id>install-hash-generator</id>
-                        <goals>
-                            <goal>install-file</goal>
-                        </goals>
-                        <phase>validate</phase>
-                        <configuration>
-                            <groupId>cloud.benchflow.commons</groupId>
-                            <artifactId>keyname-hash-generator</artifactId>
-                            <version>0.0.1</version>
-                            <packaging>jar</packaging>
-                            <file>${project.basedir}/lib/keyname-hash-generator.jar</file>
-                        </configuration>
-                    </execution>
+                    <!--<execution>-->
+                        <!--<id>install-hash-generator</id>-->
+                        <!--<goals>-->
+                            <!--<goal>install-file</goal>-->
+                        <!--</goals>-->
+                        <!--<phase>validate</phase>-->
+                        <!--<configuration>-->
+                            <!--<groupId>cloud.benchflow.commons</groupId>-->
+                            <!--<artifactId>keyname-hash-generator</artifactId>-->
+                            <!--<version>0.1.0</version>-->
+                            <!--<packaging>jar</packaging>-->
+                            <!--<file>${project.basedir}/lib/benchflow-keyname-hash-generator.jar</file>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
                 </executions>
             </plugin>
         </plugins>
