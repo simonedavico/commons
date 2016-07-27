@@ -102,7 +102,7 @@
                             <artifactId>keyname-hash-generator</artifactId>
                             <version>0.0.1</version>
                             <packaging>jar</packaging>
-                            <file>${project.basedir}/lib/benchflow-keyname-hash-generator.jar</file>
+                            <file>${project.basedir}/lib/keyname-hash-generator.jar</file>
                         </configuration>
                     </execution>
                 </executions>

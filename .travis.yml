@@ -11,21 +11,21 @@ jdk:
 # whitelist
 branches:
   only:
-    - dev
+    - fix-hash-generator-pom
   except:
     - v-dev
 
 # add support for go, and python as well
-before_install:
- # install go 1.5.2 and godep
- - wget https://storage.googleapis.com/golang/go1.5.2.linux-amd64.tar.gz
- - sudo tar -C /usr/local -xzf go1.5.2.linux-amd64.tar.gz
- - export GOROOT=/usr/local/go
- # Set GOPATH and Add Godeps dependencies to GOPATH and PATH
- - export GOPATH="${TRAVIS_BUILD_DIR}/Godeps/_workspace"
- - export PATH=$GOROOT/bin:$PATH
- - export PATH="${TRAVIS_BUILD_DIR}/Godeps/_workspace/bin:$PATH"
- - go get github.com/tools/godep
+# before_install:
+#  # install go 1.5.2 and godep
+#  - wget https://storage.googleapis.com/golang/go1.5.2.linux-amd64.tar.gz
+#  - sudo tar -C /usr/local -xzf go1.5.2.linux-amd64.tar.gz
+#  - export GOROOT=/usr/local/go
+#  # Set GOPATH and Add Godeps dependencies to GOPATH and PATH
+#  - export GOPATH="${TRAVIS_BUILD_DIR}/Godeps/_workspace"
+#  - export PATH=$GOROOT/bin:$PATH
+#  - export PATH="${TRAVIS_BUILD_DIR}/Godeps/_workspace/bin:$PATH"
+#  - go get github.com/tools/godep
  # TODO: if and when needed, enable python support and add it to CI, testing that the code works
  # install python
  # - sudo add-apt-repository ppa:fkrull/deadsnakes -y
@@ -48,6 +48,7 @@ before_deploy:
   - sudo wget https://github.com/benchflow/devops/raw/dev/ci/clean_v-dev_release.sh -O /usr/bin/clean_v-dev_release.sh
   - sudo chmod +x /usr/bin/clean_v-dev_release.sh
   - export REPO_NAME=commons
+  - export USER_NAME=simonedavico
   - /usr/bin/clean_v-dev_release.sh
 
 deploy:
@@ -55,14 +56,14 @@ deploy:
   api_key:
     secure: $GITHUB_ACCESS_TOKEN
   file:
-    - keyname-hash-generator/java/target/benchflow-keyname-hash-generator.jar
+    - keyname-hash-generator/java/target/keyname-hash-generator.jar
     - minio/java/target/benchflow-minio-client.jar
-    - docker/go/src/cloud/benchflow/commons/docker/docker.go
-    - kafka/go/src/cloud/benchflow/commons/kafka/kafka.go
-    - keyname-hash-generator/go/src/cloud/benchflow/commons/hashing/hashing.go
-    - minio/go/src/cloud/benchflow/commons/minio/minio.go
+    # - docker/go/src/cloud/benchflow/commons/docker/docker.go
+    # - kafka/go/src/cloud/benchflow/commons/kafka/kafka.go
+    # - keyname-hash-generator/go/src/cloud/benchflow/commons/hashing/hashing.go
+    # - minio/go/src/cloud/benchflow/commons/minio/minio.go
   skip_cleanup: true
   on:
     tags: false
-    repo: benchflow/commons
-    branch: dev
+    repo: simonedavico/commons
+    branch: fix-hash-generator-pom
