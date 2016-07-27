@@ -13,7 +13,31 @@
     	<project.name>benchflow-minio-client</project.name>
     	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     	<java.version>1.8</java.version>
+        <minio.java.version>2.0.1</minio.java.version>
+        <commons.io.version>2.5</commons.io.version>
     </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+            <version>${minio.java.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons.io.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>cloud.benchflow.commons</groupId>
+            <artifactId>keyname-hash-generator</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+
+    </dependencies>
 
     <build>
         <plugins>
@@ -26,6 +50,29 @@
                     <target>${java.version}</target>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <id>generateSources</id>
+                        <phase>validate</phase>
+                        <configuration>
+                            <tasks>
+                                <exec executable="/bin/bash">
+                                    <arg value="./bin/get-dependencies.sh" />
+                                </exec>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -38,6 +85,27 @@
                         </manifest>
                     </archive>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.5.2</version>
+                <executions>
+                    <execution>
+                        <id>install-hash-generator</id>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <phase>validate</phase>
+                        <configuration>
+                            <groupId>cloud.benchflow.commons</groupId>
+                            <artifactId>keyname-hash-generator</artifactId>
+                            <version>0.0.1</version>
+                            <packaging>jar</packaging>
+                            <file>${project.basedir}/lib/benchflow-keyname-hash-generator.jar</file>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

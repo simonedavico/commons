@@ -24,9 +24,7 @@ clean:
 
 get_external_dependencies:
 	# get keyname-hash-generator as dependency
-	mkdir lib
-  	wget -q --no-check-certificate -O ./lib/benchflow-keyname-hash-generator.jar \
-     http://github.com/benchflow/commons/releases/download/${KEYNAME_HASH_GENERATOR_RELEASE_VERSION}/benchflow-keyname-hash-generator.jar
+	./bin/get-dependencies.sh
 
 build: find_java get_external_dependencies
 	mvn package
