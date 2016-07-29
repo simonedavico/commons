@@ -130,7 +130,7 @@ public class BenchFlowMinioClient {
      * saved at tests/{testId}/original/docker-compose.yml
      */
     public String getOriginalDeploymentDescriptor(final String testId)  {
-        String id = hashKey(testId + "/original/" + DEPLOYMENT_DESCRIPTOR_NAME);
+        String id = hashKey(testId) + "/original/" + DEPLOYMENT_DESCRIPTOR_NAME;
         return getTextFile(id);
     }
 
@@ -140,7 +140,7 @@ public class BenchFlowMinioClient {
      * saved at tests/{testId}/original/benchflow-test.yml
      */
     public String getOriginalTestConfiguration(final String testId) {
-        String id = hashKey(testId + "/original/" + TEST_CONFIGURATION_NAME);
+        String id = hashKey(testId) + "/original/" + TEST_CONFIGURATION_NAME;
         return getTextFile(id);
     }
 
@@ -150,7 +150,7 @@ public class BenchFlowMinioClient {
      * at tests/{testId}/original/docker-compose.yml
      */
     public void saveOriginalDeploymentDescriptor(final String testId, final String deploymentDescriptor) {
-        String id = hashKey(testId + "/original/" + DEPLOYMENT_DESCRIPTOR_NAME);
+        String id = hashKey(testId) + "/original/" + DEPLOYMENT_DESCRIPTOR_NAME;
         saveTextFile(deploymentDescriptor, id);
     }
 
@@ -162,7 +162,7 @@ public class BenchFlowMinioClient {
     public void saveDeploymentDescriptorForExperiment(final String testId,
                                                       final long experimentNumber,
                                                       final String deploymentDescriptor) {
-        String id = hashKey(testId + "/" + experimentNumber + "/" +  DEPLOYMENT_DESCRIPTOR_NAME);
+        String id = hashKey(testId) + "/" + experimentNumber + "/" +  DEPLOYMENT_DESCRIPTOR_NAME;
         saveTextFile(deploymentDescriptor, id);
     }
 
@@ -174,7 +174,7 @@ public class BenchFlowMinioClient {
     public void saveTestConfigurationForExperiment(final String testId,
                                                    final long experimentNumber,
                                                    final String experimentConfiguration) {
-        String id = hashKey(testId + "/" + experimentNumber + "/" + TEST_CONFIGURATION_NAME);
+        String id = hashKey(testId) + "/" + experimentNumber + "/" + TEST_CONFIGURATION_NAME;
         saveTextFile(experimentConfiguration, id);
     }
 
@@ -184,7 +184,7 @@ public class BenchFlowMinioClient {
      * at tests/{testId}/original/benchflow-benchmark.yml
      */
     public void saveOriginalTestConfiguration(final String testId, final String testConfiguration) {
-        String id = hashKey(testId + "/original/" + TEST_CONFIGURATION_NAME);
+        String id = hashKey(testId) + "/original/" + TEST_CONFIGURATION_NAME;
         saveTextFile(testConfiguration, id);
     }
 
@@ -194,7 +194,7 @@ public class BenchFlowMinioClient {
      * from tests/{testId}/{experimentNumber}/docker-compose.yml
      */
     public String getDeploymentDescriptorForExperiment(final String testId, final long experimentNumber) {
-        String id = hashKey(testId + "/" + experimentNumber + "/" + DEPLOYMENT_DESCRIPTOR_NAME);
+        String id = hashKey(testId) + "/" + experimentNumber + "/" + DEPLOYMENT_DESCRIPTOR_NAME;
         return getTextFile(id);
     }
 
@@ -204,7 +204,7 @@ public class BenchFlowMinioClient {
      * from tests/{testId}/{experimentNumber}/{trialNumber}/docker-compose.yml
      */
     public String getDeploymentDescriptorForTrial(final String testId, final long experimentNumber, final int trialNumber) {
-        String id = hashKey(testId + "/" + experimentNumber + "/" + trialNumber + "/" + DEPLOYMENT_DESCRIPTOR_NAME);
+        String id = hashKey(testId) + "/" + experimentNumber + "/" + trialNumber + "/" + DEPLOYMENT_DESCRIPTOR_NAME;
         return getTextFile(id);
     }
 
@@ -214,7 +214,7 @@ public class BenchFlowMinioClient {
      * at tests/{testId}/original/benchflow-test.yml
      */
     public String getTestConfigurationForExperiment(final String testId, final long experimentNumber) {
-        String id = hashKey(testId + "/" + experimentNumber + "/" + TEST_CONFIGURATION_NAME);
+        String id = hashKey(testId) + "/" + experimentNumber + "/" + TEST_CONFIGURATION_NAME;
         return getTextFile(id);
     }
 
@@ -225,7 +225,7 @@ public class BenchFlowMinioClient {
      */
     public void saveDeploymentDescriptorForTrial(final String testId, final long experimentNumber,
                                                  final int trialNumber, final String descriptor) {
-        String id = hashKey(testId + "/" + experimentNumber + "/" + trialNumber + "/" + DEPLOYMENT_DESCRIPTOR_NAME);
+        String id = hashKey(testId) + "/" + experimentNumber + "/" + trialNumber + "/" + DEPLOYMENT_DESCRIPTOR_NAME;
         saveTextFile(descriptor, id);
     }
 
@@ -236,7 +236,7 @@ public class BenchFlowMinioClient {
      */
     public void removeDeploymentDescriptorForTrial(final String testId, final long experimentNumber,
                                                    final int trialNumber) {
-        String id = hashKey(testId + "/" + experimentNumber + "/" + trialNumber + "/" + DEPLOYMENT_DESCRIPTOR_NAME);
+        String id = hashKey(testId) + "/" + experimentNumber + "/" + trialNumber + "/" + DEPLOYMENT_DESCRIPTOR_NAME;
         removeIfExists(id);
     }
 
@@ -246,7 +246,7 @@ public class BenchFlowMinioClient {
      * from tests/{testId}/{experimentNumber}/benchflow-test.yml
      */
     public void removeTestConfigurationForExperiment(final String testId, final long experimentNumber) {
-        String id = hashKey(testId + "/" + experimentNumber + "/" + TEST_CONFIGURATION_NAME);
+        String id = hashKey(testId) + "/" + experimentNumber + "/" + TEST_CONFIGURATION_NAME;
         removeIfExists(id);
     }
 
@@ -257,7 +257,7 @@ public class BenchFlowMinioClient {
      */
     public void saveFabanConfiguration(final String testId, final long experimentNumber,
                                        final int trialNumber, final String configuration) {
-        String id = hashKey(testId + "/" + experimentNumber + "/" + trialNumber + "/run.xml");
+        String id = hashKey(testId) + "/" + experimentNumber + "/" + trialNumber + "/run.xml";
         saveTextFile(configuration, id);
     }
 
@@ -267,7 +267,7 @@ public class BenchFlowMinioClient {
      * from tests/{testId}/{experimentNumber}/{trialNumber}/run.xml
      */
     public String getFabanConfiguration(final String testId, final long experimentNumber, final int trialNumber) {
-        String id = hashKey(testId + "/" + experimentNumber + "/" + trialNumber + "/run.xml");
+        String id = hashKey(testId) + "/" + experimentNumber + "/" + trialNumber + "/run.xml";
         return getTextFile(id);
     }
 
@@ -277,7 +277,7 @@ public class BenchFlowMinioClient {
      * from tests/{testId}/{experimentNumber}/{trialNumber}/run.xml
      */
     public void removeFabanConfiguration(final String testId, final long experimentNumber, final int trialNumber) {
-        String id = hashKey(testId + "/" + experimentNumber + "/" + trialNumber + "/run.xml");
+        String id = hashKey(testId) + "/" + experimentNumber + "/" + trialNumber + "/run.xml";
         removeIfExists(id);
     }
 
@@ -287,7 +287,7 @@ public class BenchFlowMinioClient {
      * from tests/{testId}/{experimentNumber}/driver.jar
      */
     public InputStream getGeneratedBenchmark(final String testId, final long experimentNumber) {
-        String id = hashKey(testId + "/" + experimentNumber + "/" + GENERATED_BENCHMARK_FILENAME);
+        String id = hashKey(testId) + "/" + experimentNumber + "/" + GENERATED_BENCHMARK_FILENAME;
         return getFile(id);
     }
 
@@ -298,7 +298,7 @@ public class BenchFlowMinioClient {
      */
     public void saveGeneratedBenchmark(final String testId, final long experimentNUmber, final String driverPath) {
         try {
-            String id = hashKey(testId + "/" + experimentNUmber + "/" + GENERATED_BENCHMARK_FILENAME);
+            String id = hashKey(testId) + "/" + experimentNUmber + "/" + GENERATED_BENCHMARK_FILENAME;
             mc.putObject(TESTS_BUCKET, id, driverPath);
         } catch (MinioException | NoSuchAlgorithmException | InvalidKeyException | IOException | XmlPullParserException e) {
             throw new BenchFlowMinioClientException(e.getMessage(), e);
@@ -312,7 +312,7 @@ public class BenchFlowMinioClient {
      */
     public void saveModel(final String testId, final String modelName, final InputStream model) throws IOException {
         String modelContent = IOUtils.toString(model, "UTF-8");
-        String id = hashKey(testId + "/models/" + modelName);
+        String id = hashKey(testId) + "/models/" + modelName;
         saveTextFile(modelContent, id);
     }
 
@@ -322,7 +322,7 @@ public class BenchFlowMinioClient {
      */
     public void removeModels(final String testId) {
         try {
-            String id = hashKey(testId + "/models");
+            String id = hashKey(testId) + "/models";
             for(Result<Item> item : mc.listObjects(TESTS_BUCKET, id)) {
                 mc.removeObject(TESTS_BUCKET, item.get().objectName());
             }
@@ -340,7 +340,7 @@ public class BenchFlowMinioClient {
         List<String> modelNames = new LinkedList<>();
         try {
             try {
-                String id = hashKey(testId + "/models");
+                String id = hashKey(testId) + "/models";
                 ObjectStat stat = mc.statObject(TESTS_BUCKET, id);
             } catch(ErrorResponseException e) {
                 if(e.errorResponse().errorCode() == ErrorCode.NO_SUCH_KEY) return modelNames;
@@ -362,7 +362,7 @@ public class BenchFlowMinioClient {
      * from tests/{testId}/models/{modelName}
      */
     public String getModel(final String testId, final String modelName) {
-        String id = hashKey(testId + "/models/" + modelName);
+        String id = hashKey(testId) + "/models/" + modelName;
         return getTextFile(id);
     }
 
