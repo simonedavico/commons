@@ -339,16 +339,12 @@ public class BenchFlowMinioClient {
     public List<String> listModels(final String testId) {
         List<String> modelNames = new LinkedList<>();
         try {
-            try {
-                String id = hashKey(testId) + "/models";
-                ObjectStat stat = mc.statObject(TESTS_BUCKET, id);
-            } catch(ErrorResponseException e) {
-                if(e.errorResponse().errorCode() == ErrorCode.NO_SUCH_KEY) return modelNames;
-                else throw new BenchFlowMinioClientException(e.getMessage(), e);
+            String id = hashKey(testId) + "/models/";
+
+            for(Result<Item> item : mc.listObjects(TESTS_BUCKET, id)) {
+                modelNames.add(item.get().objectName().replace(id, ""));
             }
-            for(Result<Item> item : mc.listObjects(TESTS_BUCKET, testId + "/models")) {
-                modelNames.add(item.get().objectName());
-            }
+
         } catch (MinioException | XmlPullParserException | NoSuchAlgorithmException |
                 InvalidKeyException | IOException e) {
             throw new BenchFlowMinioClientException(e.getMessage(), e);
